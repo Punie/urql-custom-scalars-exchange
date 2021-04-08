@@ -159,7 +159,7 @@ export default function scalarExchange({
                     }
                 }));
 
-                function isString(s): s is string {
+                function isString(s: any): s is string {
                     return typeof s === 'string';
                 }
 
