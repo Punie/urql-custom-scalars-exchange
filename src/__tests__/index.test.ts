@@ -149,9 +149,14 @@ test.each([
   const forward: ExchangeIO = ops$ => pipe(ops$, map(response));
 
   const scalars = {
-    String: jest.fn((text: string) => {
-      return text;
-    }),
+    String: {
+      serialize: jest.fn((text: string) => {
+        return text;
+      }),
+      deserialize: jest.fn((text: string) => {
+        return text;
+      })
+    },
   };
 
   pipe(
