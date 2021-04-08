@@ -77,6 +77,7 @@ function getNodePath(path: readonly (string|number)[], rootNode: ASTNode): NodeP
     let currentNode = rootNode;
 
     return path.reduce((queryPath, segment) => {
+        // @ts-ignore
         currentNode = currentNode[segment];
         if (currentNode.kind === 'Field') {
             queryPath.push((currentNode.alias ?? currentNode.name).value);
