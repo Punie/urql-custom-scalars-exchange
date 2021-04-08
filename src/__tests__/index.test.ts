@@ -174,6 +174,6 @@ test.each([
 
   next(op);
 
-  expect(scalars.String).toHaveBeenCalledTimes(calls);
+  expect(scalars.String.serialize).toHaveBeenCalledTimes(calls);
   expect(result).toHaveBeenCalledTimes(1);
 });
