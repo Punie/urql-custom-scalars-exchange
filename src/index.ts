@@ -14,6 +14,7 @@ import {
     visit,
     visitWithTypeInfo
 } from 'graphql';
+import { Maybe } from 'types/graphql';
 import { map, pipe } from 'wonka';
 
 type NodePath = (string | { fragment: string })[];
@@ -69,7 +70,7 @@ interface ScalarExchangeOptions {
     schema: IntrospectionQuery,
 }
 
-function unpackType(type: GraphQLType|null): GraphQLType|null {
+function unpackType(type: Maybe<GraphQLType>): Maybe<GraphQLType> {
     return isWrappingType(type) ? unpackType(type.ofType) : type;
 }
 
@@ -94,7 +95,7 @@ export default function scalarExchange({
                                        }: ScalarExchangeOptions): Exchange {
     const typeInfo = new TypeInfo(buildClientSchema(schema));
 
-    const isMappedScalar = (type: GraphQLType|null): type is GraphQLScalarType => isScalarType(type) && scalars[type.name] !== undefined;
+    const isMappedScalar = (type: Maybe<GraphQLType>): type is GraphQLScalarType => isScalarType(type) && scalars[type.name] !== undefined;
 
     return ({ forward }) => (ops$) => {
         return pipe(
