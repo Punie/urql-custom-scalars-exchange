@@ -105,7 +105,7 @@ export default function scalarExchange({
                 // TODO: check if this works for query variables as well, or needs further handling
                 const scalarsInVariables: NodeWithPath[] = [];
 
-                const processVariable = (type: GraphQLType, path: string[]) => {
+                const processVariable = (type: Maybe<GraphQLType>, path: string[]) => {
                     const unpacked = unpackType(type);
 
                     if (isMappedScalar(unpacked)) {
