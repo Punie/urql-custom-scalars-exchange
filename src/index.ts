@@ -83,7 +83,7 @@ function getNodePath(path: readonly (string|number)[], rootNode: ASTNode): NodeP
         currentNode = currentNode[segment];
         if (currentNode.kind === 'Field') {
             queryPath.push((currentNode.alias ?? currentNode.name).value);
-        } else if (currentNode.kind === 'FragmentSpread') {
+        } else if (currentNode.kind === 'FragmentDefinition') {
             queryPath.push({ fragment: currentNode.name.value });
         }
         return queryPath;
@@ -164,8 +164,6 @@ export default function scalarExchange({
                 }
 
                 const resolveFragmentPath = (path: NodePath): string[] => path.flatMap(segment => isString(segment) ? segment : resolveFragmentPath(fragmentsInQuery[segment.fragment]));
-
-                console.log(result.data, scalarsInQuery);
                 scalarsInQuery.forEach(scalar => result.data = mapScalar(result.data, resolveFragmentPath(scalar.path), scalars[scalar.name].deserialize));
 
                 return result;
