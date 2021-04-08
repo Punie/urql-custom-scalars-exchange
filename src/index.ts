@@ -69,7 +69,7 @@ interface ScalarExchangeOptions {
     schema: IntrospectionQuery,
 }
 
-function unpackType(type: GraphQLType): GraphQLType {
+function unpackType(type: GraphQLType|null): GraphQLType|null {
     return isWrappingType(type) ? unpackType(type.ofType) : type;
 }
 
@@ -94,7 +94,7 @@ export default function scalarExchange({
                                        }: ScalarExchangeOptions): Exchange {
     const typeInfo = new TypeInfo(buildClientSchema(schema));
 
-    const isMappedScalar = (type: GraphQLType): type is GraphQLScalarType => isScalarType(type) && scalars[type.name] !== undefined;
+    const isMappedScalar = (type: GraphQLType|null): type is GraphQLScalarType => isScalarType(type) && scalars[type.name] !== undefined;
 
     return ({ forward }) => (ops$) => {
         return pipe(
