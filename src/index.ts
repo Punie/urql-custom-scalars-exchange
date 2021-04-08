@@ -14,8 +14,9 @@ import {
     visit,
     visitWithTypeInfo
 } from 'graphql';
-import { Maybe } from 'types/graphql';
 import { map, pipe } from 'wonka';
+
+type Maybe<T> = null | undefined | T;
 
 type NodePath = (string | { fragment: string })[];
 
