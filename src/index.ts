@@ -85,7 +85,7 @@ function getNodePath(path: readonly (string|number)[], rootNode: ASTNode): NodeP
             queryPath.push({ fragment: currentNode.name.value });
         }
         return queryPath;
-    }, []);
+    }, [] as NodePath);
 }
 
 export default function scalarExchange({
