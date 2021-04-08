@@ -165,7 +165,7 @@ export default function scalarExchange({
 
                 const resolveFragmentPath = (path: NodePath): string[] => path.flatMap(segment => isString(segment) ? segment : resolveFragmentPath(fragmentsInQuery[segment.fragment]));
 
-                console.log(scalarsInQuery);
+                console.log(result.data, scalarsInQuery);
                 scalarsInQuery.forEach(scalar => result.data = mapScalar(result.data, resolveFragmentPath(scalar.path), scalars[scalar.name].deserialize));
 
                 return result;
