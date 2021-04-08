@@ -73,7 +73,7 @@ function unpackType(type: GraphQLType): GraphQLType {
     return isWrappingType(type) ? unpackType(type.ofType) : type;
 }
 
-function getNodePath(path: readonly PropertyKey[], rootNode: ASTNode): NodePath {
+function getNodePath(path: readonly (string|number)[], rootNode: ASTNode): NodePath {
     let currentNode = rootNode;
 
     return path.reduce((queryPath, segment) => {
