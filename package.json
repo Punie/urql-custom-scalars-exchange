@@ -17,7 +17,6 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -35,16 +34,19 @@
   "resolutions": {
     "typescript": "^4.6.3"
   },
+  "dependencies": {
+    "@urql/core": ">=2.4.3",
+    "wonka": "^4.0.15"
+  },
+  "peerDependencies": {
+    "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
+  },
   "devDependencies": {
+    "graphql": "^16.3.0",
     "graphql-tag": "^2.12.6",
     "husky": "^7.0.4",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.6.3"
-  },
-  "dependencies": {
-    "@urql/core": "^1.12.3 || ^2.0.0",
-    "graphql": "^16.3.0",
-    "wonka": "^4.0.14"
   }
 }
