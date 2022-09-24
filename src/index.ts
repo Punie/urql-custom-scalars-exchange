@@ -10,6 +10,7 @@ import {
   isInputObjectType,
   isScalarType,
   isWrappingType,
+  Kind,
   TypeInfo,
   visit,
   visitWithTypeInfo,
@@ -84,9 +85,11 @@ function getNodePath(
   return path.reduce((queryPath, segment) => {
     // @ts-ignore
     currentNode = currentNode[segment];
-    if (currentNode.kind === 'Field') {
+    if (currentNode.kind === Kind.FIELD) {
       queryPath.push((currentNode.alias ?? currentNode.name).value);
-    } else if (currentNode.kind === 'FragmentDefinition') {
+    } else if (currentNode.kind === Kind.FRAGMENT_DEFINITION) {
+      queryPath.push({ fragment: currentNode.name.value });
+    } else if (currentNode.kind === Kind.INTERFACE_TYPE_DEFINITION) {
       queryPath.push({ fragment: currentNode.name.value });
     }
     return queryPath;
